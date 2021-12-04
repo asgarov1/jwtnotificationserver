@@ -1,4 +1,4 @@
-package com.javidasgarov.notificationserver.controller.filter;
+package com.javidasgarov.notificationserver.security.filter;
 
 import com.javidasgarov.notificationserver.security.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;

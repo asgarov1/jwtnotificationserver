@@ -1,7 +1,9 @@
 package com.javidasgarov.notificationserver.domain;
 
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.Entity;
@@ -11,7 +13,9 @@ import java.util.List;
 
 @Entity
 @Table
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 public class Role extends AbstractPersistable<Long> {
     public static final String ROLE_USER = "ROLE_USER";

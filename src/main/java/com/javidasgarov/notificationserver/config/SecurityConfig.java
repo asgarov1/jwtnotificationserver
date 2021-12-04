@@ -21,8 +21,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final JwtTokenProvider jwtTokenProvider;
 
     private static final String ADMIN_ENDPOINTS = "/admin/**";
-    private static final String LOGIN_ENDPOINT = "/login";
-    private static final String H2_ENDPOINT = "/h2-console/**";
+    private static final String AUTHENTICATION_ENDPOINTS = "/authentication/**";
+    private static final String H2_ENDPOINTS = "/h2-console/**";
     public static final String ADMIN = "ADMIN";
 
     @Bean
@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .mvcMatchers(LOGIN_ENDPOINT).permitAll()
+                .mvcMatchers(AUTHENTICATION_ENDPOINTS).permitAll()
                 .mvcMatchers(ADMIN_ENDPOINTS).hasRole(ADMIN)
                 .anyRequest().authenticated()
                 .and()
@@ -53,6 +53,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers(H2_ENDPOINT);
+        web.ignoring().antMatchers(H2_ENDPOINTS);
     }
 }

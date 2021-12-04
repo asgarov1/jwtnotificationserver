@@ -1,6 +1,6 @@
 package com.javidasgarov.notificationserver.security.config;
 
-import com.javidasgarov.notificationserver.controller.filter.JwtTokenFilter;
+import com.javidasgarov.notificationserver.security.filter.JwtTokenFilter;
 import com.javidasgarov.notificationserver.security.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;

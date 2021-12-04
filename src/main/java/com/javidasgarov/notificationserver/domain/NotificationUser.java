@@ -1,8 +1,6 @@
 package com.javidasgarov.notificationserver.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
@@ -10,7 +8,10 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Data
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"username"})})
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class NotificationUser extends AbstractPersistable<Long> {
@@ -24,8 +25,16 @@ public class NotificationUser extends AbstractPersistable<Long> {
     private Date lastUpdated;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name="user_roles",
-    joinColumns = {@JoinColumn(name="user_id", referencedColumnName = "id")},
-    inverseJoinColumns = {@JoinColumn(name="role_id", referencedColumnName = "id")})
+    @JoinTable(name = "user_roles",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
     private List<Role> roles;
+
+    public NotificationUser(String username, String password) {
+        this.username = username;
+        this.password = password;
+        status = Status.ACTIVE;
+        lastUpdated = new Date();
+        roles = List.of(Role.ofUser());
+    }
 }
